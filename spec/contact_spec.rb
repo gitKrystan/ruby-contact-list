@@ -39,6 +39,17 @@ describe(Contact) do
       expect(Contact.all()).to(eq([]))
     end
   end
+
+  describe('find') do
+    it('returns a contact by its id number') do
+      first_contact = mister_t()
+      first_contact.save()
+      id_of_first_contact = first_contact.id()
+      second_contact = alan_rickman()
+      second_contact.save()
+      expect(Contact.find(id_of_first_contact)).to(eq(first_contact))
+    end
+  end
 end
 
 def mister_t
@@ -46,4 +57,11 @@ def mister_t
               :last => 'T',
               :job => 'the muscle',
               :company => 'A-Team'})
+end
+
+def alan_rickman
+  Contact.new({:first => 'Alan',
+              :last => 'Rickman',
+              :job => 'Potions Master',
+              :company => 'Hogwarts'})
 end

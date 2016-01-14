@@ -22,4 +22,12 @@ class Contact
   def self.clear
     @@contacts = []
   end
+
+  def self.find (identification)
+    @@contacts.each() do |contact|
+      if contact.id() == identification
+        return contact
+      end
+    end
+  end
 end
