@@ -2,8 +2,10 @@
 <ul>
   <% @contacts.each() do |contact| %>
     <li>
-      <span><%= contact.last() %>, <%= contact.first() %></span>
-      <span><%= contact.company() %></span>
+      <a href="/contacts/<%= contact.id() %>">
+        <span><%= contact.last() %>, <%= contact.first() %></span>
+      </a>
+        <span><%= contact.company() %></span>
     </li>
   <% end %>
 </ul>

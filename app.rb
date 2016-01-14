@@ -22,3 +22,8 @@ end
 get('/contacts/new') do
   erb(:contact_form)
 end
+
+get('/contacts/:id') do
+  @contact = Contact.find(params[:id].to_i())
+  erb(:contact)
+end
