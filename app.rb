@@ -4,6 +4,7 @@ require('./lib/contact')
 require('./lib/email_address')
 require('./lib/mailing_address')
 require('./lib/phone_number')
+require('pry')
 
 get('/') do
   @contacts = Contact.all()
@@ -33,22 +34,40 @@ end
 post('/contacts/:id') do
   @contact_id = params[:id].to_i()
   @contact = Contact.find(@contact_id)
-  home_number = params[:home]
-  work_number = params[:work]
-  cell_number = params[:cell]
+  @phone_numbers = PhoneNumber.find_by_contact_id(@contact_id)
+  @phone_numbers.each do |phone_number|
+    number_id = phone_number.id().to_s
+    area_id = phone_number.id().to_s << "_area"
+    if params.fetch(number_id) != ""
+      phone_number.phone_number = params.fetch(number_id)
+    end
 
-  if home_number.length() > 0
-    home = PhoneNumber.new({:area_code    => params[:home_area],
-                            :phone_number => home_number,
-                            :type         => "home",
-                            :contact_id   => params[:id].to_i()})
-    home.save()
+    if params.fetch(area_id) != ""
+      phone_number.area_code = params.fetch(area_id)
+    end
   end
-  
+
+  new_number = params[:new_number]
+  if new_number != ""
+    new_number = PhoneNumber.new({:area_code    => params[:new_number_area],
+                                  :phone_number => new_number,
+                                  :type         => params[:new_number_type],
+                                  :contact_id   => @contact_id})
+    new_number.save()
+  end
+
   redirect "/contacts/#{@contact_id}"
 end
 
 get('/contacts/:id/update') do
-  @contact = Contact.find(params[:id].to_i())
+  @contact_id = params[:id].to_i()
+  @contact = Contact.find(@contact_id)
+  @phone_numbers = PhoneNumber.find_by_contact_id(@contact_id)
   erb(:contact_update_form)
+end
+
+get('/contacts/:contact_id/:number_id/delete') do
+  phone_number = PhoneNumber.find(params[:number_id].to_i)
+  phone_number.delete()
+  redirect("/contacts/#{params[:contact_id]}/update")
 end

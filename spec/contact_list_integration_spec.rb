@@ -32,8 +32,8 @@ describe('the contact book page') do
       create_a_contact()
       click_link('Obama, Barack')
       click_link('Update Contact')
-      fill_in('home_area', :with => '555')
-      fill_in('home', :with => '8675309')
+      fill_in('new_number_area', :with => '555')
+      fill_in('new_number', :with => '8675309')
       click_button('Update')
       expect(page).to have_content('8675309')
     end

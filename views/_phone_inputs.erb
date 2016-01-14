@@ -1,17 +1,21 @@
-<div class="form-inline">
-  <label for="home_area">Home</label>
-  <input type="text" name="home_area" id="home_area">
-  <input type="text" name="home" id="home">
-</div>
+<% if @phone_numbers.length() > 0 %>
+  <% @phone_numbers.each() do |phone_number| %>
+    <div class="form-inline">
+      <label for="<%= phone_number.type() %>_area"><%= phone_number.type() %></label>
+      <input type="text" name="<%= phone_number.id() %>_area" placeholder="<%= phone_number.area_code() %>">
+      <input type="text" name="<%= phone_number.id() %>" placeholder="<%= phone_number.phone_number() %>">
+      <a href="/contacts/<%= phone_number.contact_id() %>/<%= phone_number.id() %>/delete">Delete</a>
+    </div>
+  <% end %>
+<% end %>
 
 <div class="form-inline">
-  <label for="work">Work</label>
-  <input type="text" name="work_area" id="work_area">
-  <input type="text" name="work" id="work">
-</div>
-
-<div class="form-inline">
-  <label for="cell">Cell</label>
-  <input type="text" name="cell_area" id="cell_area">
-  <input type="text" name="cell" id="cell">
+  <label for="new_number">New Number</label>
+  <select class="form-control" name="new_number_type">
+    <option value="home">Home</option>
+    <option value="work">Work</option>
+    <option value="cell">Cell</option>
+  </select>
+  <input type="text" name="new_number_area" id="new_number_area">
+  <input type="text" name="new_number" id="new_number">
 </div>

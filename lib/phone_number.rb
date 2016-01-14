@@ -1,5 +1,6 @@
 class PhoneNumber
   attr_reader(:area_code, :phone_number, :type, :contact_id, :id)
+  attr_writer(:area_code, :phone_number, :type)
 
   @@phone_numbers = []
 
@@ -13,6 +14,10 @@ class PhoneNumber
 
   def save
     @@phone_numbers << self
+  end
+
+  def delete
+    @@phone_numbers.delete(self)
   end
 
   def self.all
