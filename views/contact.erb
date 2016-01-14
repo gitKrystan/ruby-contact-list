@@ -1,1 +1,12 @@
 <h1><%= @contact.first() %> <%= @contact.last() %></h1>
+<h3><%= @contact.job() %> <%= @contact.company() %></h3>
+
+<ul>
+  <% @phone_numbers.each() do |phone_number| %>
+    <li><%= phone_number.type() %> (<%= phone_number.area_code() %>)<%= phone_number.phone_number() %></li>
+  <% end %>
+</ul>
+
+<a href='/contacts/<%= @contact_id %>/update'>
+  <button class="btn btn-default">Update Contact</button>
+</a>
