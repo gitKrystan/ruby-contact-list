@@ -40,7 +40,7 @@ describe(Contact) do
     end
   end
 
-  describe('find') do
+  describe('.find') do
     it('returns a contact by its id number') do
       first_contact = mister_t()
       first_contact.save()

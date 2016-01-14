@@ -44,7 +44,7 @@ describe(MailingAddress) do
     end
   end
 
-  describe('find') do
+  describe('.find') do
     it('returns an address by its id number') do
       first_address = white_house()
       first_address.save()
