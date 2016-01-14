@@ -26,11 +26,21 @@ class MailingAddress
     @@mailing_addresses = []
   end
 
-  def self.find (identification)
+  def self.find(identification)
     @@mailing_addresses.each() do |address|
       if address.id() == identification
         return address
       end
     end
+  end
+
+  def self.find_by_contact_id(contact_identification)
+    found_addresses = []
+    @@mailing_addresses.each() do |address|
+      if address.contact_id() == contact_identification
+        found_addresses << address
+      end
+    end
+    found_addresses
   end
 end

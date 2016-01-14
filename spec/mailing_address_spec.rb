@@ -54,6 +54,20 @@ describe(MailingAddress) do
       expect(MailingAddress.find(id_of_first_address)).to(eq(first_address))
     end
   end
+
+  describe('.find_by_contact_id') do
+    it('returns an array of addresses that match the contact_id number') do
+      obama_address = white_house()
+      obama_address.save()
+      santa_first_address = north_pole()
+      santa_first_address.save()
+      contact_id_of_santa = santa_first_address.contact_id()
+      santa_second_address = santa_summer_address()
+      santa_second_address.save()
+      expect(MailingAddress.find_by_contact_id(contact_id_of_santa)).
+        to(eq([santa_first_address, santa_second_address]))
+    end
+  end
 end
 
 def white_house
@@ -72,6 +86,16 @@ def north_pole
                       :city => 'North Pole',
                       :state => 'AK',
                       :zip => '99705',
+                      :type => 'home',
+                      :contact_id => 2})
+end
+
+def santa_summer_address
+  MailingAddress.new({:house_number => '1500',
+                      :street => 'Epcot Resorts Blvd',
+                      :city => 'Lake Buena Vista',
+                      :state => 'FL',
+                      :zip => '32830',
                       :type => 'home',
                       :contact_id => 2})
 end
