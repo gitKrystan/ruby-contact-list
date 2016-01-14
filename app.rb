@@ -12,7 +12,9 @@ end
 
 post('/') do
   new_contact = Contact.new({:first => params[:first],
-                             :last  => params[:last]})
+                             :last  => params[:last],
+                             :title  => params[:title],
+                             :company  => params[:company]})
   new_contact.save()
   redirect('/')
 end

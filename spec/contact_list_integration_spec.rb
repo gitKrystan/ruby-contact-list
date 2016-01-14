@@ -16,6 +16,6 @@ end
 def fill_in_person_info
   fill_in('first', :with => 'Barack')
   fill_in('last', :with => 'Obama')
-  # fill_in('title', :with => 'POTUS')
-  # fill_in('company', :with => 'The West Wing')
+  fill_in('title', :with => 'POTUS')
+  fill_in('company', :with => 'The West Wing')
 end
