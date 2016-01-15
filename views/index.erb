@@ -1,11 +1,11 @@
 <h1>Contact List</h1>
-<ul>
+<ul class="nav">
   <% @contacts.each() do |contact| %>
     <li>
       <a href="/contacts/<%= contact.id() %>">
         <span><%= contact.last() %>, <%= contact.first() %></span>
+        <span class="small"><%= contact.company() %></span>
       </a>
-        <span><%= contact.company() %></span>
     </li>
   <% end %>
 </ul>
